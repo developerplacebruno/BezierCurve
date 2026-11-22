@@ -1,0 +1,13 @@
+local BezierCurve = {}
+
+local function lerp(a, b, t)
+	return a + (b - a) * t
+end
+
+function BezierCurve.Quad(p0, p1, p2, t)
+	local a = lerp(p0, p1, t)
+	local b = lerp(p1, p2, t)
+    return lerp(a, b, t)
+end
+
+return BezierCurve
