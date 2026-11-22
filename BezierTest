@@ -1,25 +1,24 @@
+--!strict
 local ReplicatedStorage = game:GetService("ReplicatedStorage")
 local RunService = game:GetService("RunService")
 
 local BezierCurve = require(ReplicatedStorage.Shared.Modules.BezierCurve)
 
 local connection
-local duration = 4
+local DURATION = 4
 local elapsed = 0
 
 local part: Part = workspace:WaitForChild("Part")
-local p0: Part = workspace:WaitForChild("P0")
-local p1: Part = workspace:WaitForChild("P1")
-local p2: Part = workspace:WaitForChild("P2")
-
-task.wait(5)
+local p0: Vector3 = workspace:WaitForChild("P0").Position
+local p1: Vector3 = workspace:WaitForChild("P1").Position
+local p2: Vector3 = workspace:WaitForChild("P2").Position
 
 connection = RunService.PreRender:Connect(function(dt)
 	elapsed += dt
 
-	local t = elapsed / duration
+	local t = elapsed / DURATION
 
-	part.Position = BezierCurve.Quad(p0.Position, p1.Position, p2.Position, t)
+	part.Position = BezierCurve.Quad(p0, p1, p2, t)
 
 	if t >= 1 then
 		connection:Disconnect()
