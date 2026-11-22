@@ -23,5 +23,6 @@ connection = RunService.PreRender:Connect(function(dt)
 
 	if t >= 1 then
 		connection:Disconnect()
+		part:Destroy()
 	end
 end)
