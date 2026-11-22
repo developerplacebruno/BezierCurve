@@ -1,3 +1,4 @@
+--!native
 local BezierCurve = {}
 
 local function lerp(a, b, t)
