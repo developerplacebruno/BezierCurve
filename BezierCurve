@@ -2,13 +2,29 @@
 local BezierCurve = {}
 
 local function lerp(a, b, t)
-	return a + (b - a) * t
+	if typeof(a) == "UDim2" then
+		return UDim2.fromScale(a.X.Scale + (b.X.Scale - a.X.Scale) * t, a.Y.Scale + (b.Y.Scale - a.Y.Scale) * t)
+	else
+		return a + (b - a) * t
+	end
 end
 
 function BezierCurve.Quad(p0, p1, p2, t)
 	local a = lerp(p0, p1, t)
 	local b = lerp(p1, p2, t)
-    return lerp(a, b, t)
+	
+	return lerp(a, b, t)
+end
+
+function BezierCurve.Cubic(p0, p1, p2, p3, t)
+	local a = lerp(p0, p1, t)
+	local b = lerp(p1, p2, t)
+	local c = lerp(p2, p3, t)
+
+	local d = lerp(a, b, t)
+	local e = lerp(b, c, t)
+
+	return lerp(d, e, t)
 end
 
 return BezierCurve
